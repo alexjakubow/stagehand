@@ -1,0 +1,30 @@
+diff --git a/osf/utils/fields.py b/osf/utils/fields.py
+index 002c6b7cb2..cb75c9fae9 100644
+--- a/osf/utils/fields.py
++++ b/osf/utils/fields.py
+@@ -28,7 +28,11 @@ def encrypt_string(value, prefix='jwe:::') -> str:
+     if value:
+         _value_bytes = ensure_bytes(value)
+         if _value_bytes and not _value_bytes.startswith(prefix):
+-            value = (prefix + jwe.encrypt(_value_bytes, SENSITIVE_DATA_KEY)).decode()
++            try:
++                value = (prefix + jwe.encrypt(_value_bytes, SENSITIVE_DATA_KEY)).decode()
++            except Exception as e:
++                if not settings.DEBUG_MODE:
++                    raise(e)
+     return value
+ 
+ 
+@@ -37,7 +41,11 @@ def decrypt_string(value, prefix='jwe:::') -> str:
+     if value:
+         _value_bytes = ensure_bytes(value)
+         if _value_bytes.startswith(prefix):
+-            value = jwe.decrypt(_value_bytes[len(prefix):], SENSITIVE_DATA_KEY).decode()
++            try:
++                value = jwe.decrypt(_value_bytes[len(prefix):], SENSITIVE_DATA_KEY).decode()
++            except Exception as e:
++                if not settings.DEBUG_MODE:
++                    raise(e)
+     return value
+ 
+ 
