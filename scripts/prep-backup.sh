@@ -1,14 +1,14 @@
 #!/bin/bash
 ################################################################################
 # Task:         Prepare OSF Backup for Local Use
-# Description:  This script modifies the OSF codebase and database files for
-#               local use.
+# Description:  This script clones a fresh copy of the OSF codebase from GitHub
+#               and modifies the codebase and database files for local use.
 ################################################################################
 
 # Parse arguments
-PGDIR=${1:-"${HOME}/osfdata/pg"}
-CODEDIR=${2:-"${HOME}/osf.io"}
-REPLACEMENTS=${3:-"pgfiles"}
+PGDIR=${1:-"${HOME}/osfdata/pg"}  # Postgres location
+CODEDIR=${2:-"${HOME}/osf.io"}    # Codebase location
+REPLACEMENTS=${3:-"pgfiles"}      # Location of replacement files
 
 # Define constants
 URL=https://github.com/CenterForOpenScience/osf.io.git

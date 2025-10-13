@@ -1,8 +1,14 @@
 #!/bin/bash
+################################################################################
+# Task:         Fetch OSF Backup from GCS
+# Description:  This script downloads and extracts the latest backup of the OSF
+#               database from Google Cloud Storage.  Previous backups will be
+#               deleted to save space.
+################################################################################
 
 # Parse arguments
-LAG=${1:-1}
-DATADIR=${2:-"${HOME}/osfdata"}
+LAG=${1:-1}                      #number of most recent backups to download
+DATADIR=${2:-"${HOME}/osfdata"}  #data directory
 
 
 # Manage Directories -----------------------------------------------------------
@@ -33,4 +39,5 @@ if [ ! -f $DATADIR/compressed/$filename ]; then
 fi
 
 echo "Extracting $filename..."
+sleep 10
 tar -xzf $DATADIR/compressed/$filename -C $DATADIR/pg

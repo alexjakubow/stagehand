@@ -1,12 +1,15 @@
 #!/bin/bash
+################################################################################
+# Task:         Run Pipeline
+# Description:  This script runs the entire pipeline.
+################################################################################
 
 # Parameters
 NTH_RECENT=${1:-1}
 DATADIR=${2:-"${HOME}/osfdata"}
 CODEDIR=${3:-"${HOME}/osf.io"}
 
-PGDIR=${DATADIR}/pg  # Postgres location (defaults to ./pg subdirectory)
-
+PGDIR=${DATADIR}/pg  # Postgres location (default: ${DATADIR}/pg)
 
 # Set which switches to run in pipeline
 RUN_GET=1
